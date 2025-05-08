@@ -17,7 +17,7 @@ const server = createServer((request, response) => {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Guitars</title>
 </head>
-<body style="font-size:1.3rem">
+<body style="font-size:1.5rem">
 <h2>My Guitars</h2>
 <ul>
 ${guitars.map(createListItem).join('')}

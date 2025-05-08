@@ -1,13 +1,12 @@
 import { createServer } from 'http';
 import guitars from './data.js';
-import { url } from 'inspector';
 
 const server = createServer((request, response) => {
   // Removed redundant declaration of content
 
   response.writeHead(200, { 'Content-Type': 'text/html;charset=utf-8' });
 
-  const url = new URL(request.url, 'http://localhost');
+  console.log(request.url);
 
   let content = `<!DOCTYPE html>
 <html lang="en">
@@ -17,7 +16,7 @@ const server = createServer((request, response) => {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Guitars</title>
 </head>
-<body style="font-size:1.3rem">
+<body style="font-size:3rem">
 <h2>My Guitars</h2>
 <ul>
 ${guitars.map(createListItem).join('')}
