@@ -1,11 +1,12 @@
-export const createList = (guitars) => `
+export const createList = (guitars) => ` 
   <h2>My Guitars</h2>
   <ul>
-    ${guitars.map(createListItem).join('/n')}
+    ${guitars.map(createListItem).join('\n')}
   </ul>
 `;
 
-const createListItem = ({id, make, model}) => `<li><a href="?id=${id}">${make} ${model}</a></li>`;
+const createListItem = ({ id, make, model }) =>
+  `<li><a href="?id=${id}">${make} ${model}</a></li>`;
 
 export function getGuitarContent(guitar) {
   if (guitar) {
