@@ -21,6 +21,15 @@ const server = createServer((request, response) => {
   } else if (id) {
     const guitar = guitars.find((g) => g.id == id);
     content = getGuitarContent(guitar);
+  }
+
+  let content;
+
+  if (parts.includes('add')) {
+    content = getForm();
+  } else if (id) {
+    let guitar = guitars.find((g) => g.id == id);
+    content = getGuitarContent(guitar);
   } else {
     content = createList(guitars);
   }

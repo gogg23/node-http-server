@@ -1,6 +1,6 @@
 import { createServer } from 'http';
 import guitars from './data.js';
-import { createList, getForm, getGuitarContent, view } from './content.js';
+import { createList, getGuitarContent } from './content.js';
 
 const server = createServer((request, response) => {
   const parts = request.url.split('/');
@@ -20,6 +20,15 @@ const server = createServer((request, response) => {
     content = getForm();
   } else if (id) {
     const guitar = guitars.find((g) => g.id == id);
+    content = getGuitarContent(guitar);
+  }
+
+  let content;
+
+  if (parts.includes('add')) {
+    content = getForm();
+  } else if (id) {
+    let guitar = guitars.find((g) => g.id == id);
     content = getGuitarContent(guitar);
   } else {
     content = createList(guitars);

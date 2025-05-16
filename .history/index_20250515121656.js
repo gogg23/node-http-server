@@ -1,6 +1,6 @@
 import { createServer } from 'http';
 import guitars from './data.js';
-import { createList, getForm, getGuitarContent, view } from './content.js';
+import { createList, getGuitarContent } from './content.js';
 
 const server = createServer((request, response) => {
   const parts = request.url.split('/');
@@ -21,11 +21,33 @@ const server = createServer((request, response) => {
   } else if (id) {
     const guitar = guitars.find((g) => g.id == id);
     content = getGuitarContent(guitar);
+  }
+
+  let content;
+
+  if (parts.includes('add')) {
+    content = getForm();
+  } else if (id) {
+    let guitar = guitars.find((g) => g.id == id);
+    content = getGuitarContent(guitar);
   } else {
     content = createList(guitars);
   }
 
-  response.end(view(content));
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Guitars</title>
+</head>
+<body style="font-size:1.3rem">
+  ${content}
+</body>
+</html>`;
+
+  response.end(html);
 });
 
 function handleDelete(id) {
