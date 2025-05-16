@@ -1,5 +1,5 @@
 export const createList = (guitars) => ` 
-<h2>My Guitars <a href="/add">Add new guitar</a></h2>
+  <h2<a>Add new guitar</a>>My Guitars</h2>
   <ul>
     ${guitars.map(createListItem).join('\n')}
   </ul>

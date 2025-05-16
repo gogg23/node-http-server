@@ -1,5 +1,5 @@
 export const createList = (guitars) => ` 
-<h2>My Guitars <a href="/add">Add new guitar</a></h2>
+  <h2>My Guitars</h2>
   <ul>
     ${guitars.map(createListItem).join('\n')}
   </ul>
@@ -9,7 +9,7 @@ const createListItem = ({ id, make, model }) =>
   `<li><a href="?id=${id}">${make} ${model}</a></li>`;
 
 export const getForm = () => `
-<form method="post" action="/save">
+<form method="post" action="/add">
 <div>
      Make: <input type="text" name="guitar_make" />
 </div>
