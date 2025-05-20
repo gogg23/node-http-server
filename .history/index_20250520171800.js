@@ -1,5 +1,5 @@
 import { createServer } from 'http';
-import { getGuitars, saveGuitars } from './data.js';
+import {getGuitars} from './data.js';
 import { createList, getForm, getGuitarContent, view } from './content.js';
 import { parse } from 'querystring';
 
@@ -19,10 +19,9 @@ const server = createServer((request, response) => {
 
     request.on('end', () => {
       const guitar = parse(body);
-
-      saveGuitar({
-        make: guitar.guitar_make,
-        model: guitar.guitar_model,
+       
+      guitars.push({
+        id:
       });
     });
 
