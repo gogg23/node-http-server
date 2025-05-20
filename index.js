@@ -1,31 +1,48 @@
 import { createServer } from 'http';
 import guitars from './data.js';
 import { createList, getForm, getGuitarContent, view } from './content.js';
+import { parse } from 'querystring';
 
 const server = createServer((request, response) => {
   const parts = request.url.split('/');
 
-  if (parts.includes('delete')) {
+  if (request.method === 'POST') {
+    let body = '';
+
+    request.on('readable', () => {
+      const data = request.read();
+
+      if (data !== null) {
+        body += data;
+      }
+    });
+
+    request.on('end', () => {
+      console.log(body);
+    });
+
+    // Handle POST logic here
+  } else if (parts.includes('delete')) {
     handleDelete(parts[2]);
     return redirect(response, '/');
-  }
-
-  response.writeHead(200, { 'Content-Type': 'text/html;charset=utf-8' });
-
-  const url = new URL(request.url, 'http://localhost');
-  const id = url.searchParams.get('id');
-  let content = '';
-
-  if (parts.includes('add')) {
-    content = getForm();
-  } else if (id) {
-    const guitar = guitars.find((g) => g.id == id);
-    content = getGuitarContent(guitar);
   } else {
-    content = createList(guitars);
-  }
+    response.writeHead(200, { 'Content-Type': 'text/html;charset=utf-8' });
 
-  response.end(view(content));
+    const url = new URL(request.url, 'http://localhost');
+    const id = url.searchParams.get('id');
+    let content = '';
+
+    if (parts.includes('add')) {
+      content = getForm();
+    } else if (id) {
+      let guitar = guitars.find((g) => g.id == id);
+      content = getGuitarContent(guitar);
+    } else {
+      content = createList(guitars);
+    }
+
+    response.end(view(content));
+  }
 });
 
 function handleDelete(id) {
