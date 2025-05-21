@@ -10,16 +10,13 @@ const guitars = [
   { id: newId(), make: 'Gibson', model: 'Les Paul' },
 ];
 
-export const getGuitars = () => guitars;
-export function saveGuitar(guitar) {
+function getGuitars() {
+  return guitars;
+}
+
+function saveGuitar(guitar) {
   guitar.id = newId();
   guitars.push(guitar);
 }
 
-export function deleteGuitar(id) {
-  let index = guitars.findIndex((g) => g.id == id);
-
-  // TODO: check index
-
-  guitars.splice(index, 1);
-}
+export { getGuitars, saveGuitar };

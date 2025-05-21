@@ -15,11 +15,3 @@ export function saveGuitar(guitar) {
   guitar.id = newId();
   guitars.push(guitar);
 }
-
-export function deleteGuitar(id) {
-  let index = guitars.findIndex((g) => g.id == id);
-
-  // TODO: check index
-
-  guitars.splice(index, 1);
-}
