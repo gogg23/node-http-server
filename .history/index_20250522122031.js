@@ -37,9 +37,6 @@ const server = createServer((request, response) => {
       handleDelete(parts[2]);
       redirect(response, '/');
     } else if (request.url === '/assets/css/style.css') {
-      try {
-        const cssFilename = '.public/assets/css/style.css'; 
-      }
     } else {
       response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
 

@@ -2,7 +2,6 @@ import { createServer } from 'http';
 import { deleteGuitar, getGuitars, saveGuitar } from './data.js';
 import { createList, getForm, getGuitarContent, view } from './content.js';
 import { parse } from 'querystring';
-import { readFile } from 'fs/promises';
 
 const server = createServer((request, response) => {
   // /delete/id
@@ -31,15 +30,11 @@ const server = createServer((request, response) => {
 
       redirect(response, '/');
     });
-  } else {
-    // GET
+  } else { // GET
     if (parts.includes('delete')) {
       handleDelete(parts[2]);
       redirect(response, '/');
-    } else if (request.url === '/assets/css/style.css') {
-      try {
-        const cssFilename = '.public/assets/css/style.css'; 
-      }
+      else if (request.url)
     } else {
       response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
 
